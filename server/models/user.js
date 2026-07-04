@@ -1,48 +1,65 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
-        firstName:{
-            type:String,
-            required:true
+        firstName: {
+            type: String,
+            required: true,
         },
-        lastName:{
-            type:String,
-            required:true,
+        lastName: {
+            type: String,
+            required: true,
         },
-        dateOfBirth:{
-            type:Date,
-            required:true
+        dateOfBirth: {
+            type: Date,
+            required: true,
         },
-        email:{
-            type:String,
-            required:true,
-            unique:true
+        email: {
+            type: String,
+            required: true,
+            unique: true,
         },
-        phone:{
-            type:String,
-            required:true
+        phone: {
+            type: String,
+            required: true,
         },
-        password:{
-            type:String,
-            required:true
+        password: {
+            type: String,
+            required: true,
         },
-        role:{
-            type:String,
-            enum:["Customer", "Admin"],
-            default:"Customer"
+        role: {
+            type: String,
+            enum: ["Customer", "Admin"],
+            default: "Customer",
         },
-        address:{
-            street:String,
-            city:String,
-            state:String,
-            pinCode:String,
-            country:String
-        }
+        address: {
+            street: {
+                type: String,
+                required: true,
+            },
+            city: {
+                type: String,
+                required: true,
+            },
+            state: {
+                type: String,
+                required: true,
+            },
+            zipCode: {
+                type: String,
+                required: true,
+            },
+            country: {
+                type: String,
+                required: true,
+            },
+        },
     },
     {
-        timestamps:true
+        timestamps: true,
     }
-)
+);
 
-module.exports = mongoose.connect("User",userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
